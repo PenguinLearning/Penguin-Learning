@@ -6,10 +6,27 @@
 body {
   background-color: orange;
   font-family: verdana;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #FFA500;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
 }
 
 .center {
   text-align: center;
+  margin-top: 60px; /* Add margin to center content below navbar */
 }
 
 h1 {
@@ -40,6 +57,10 @@ p {
 </style>
 </head>
 <body>
+<div class="navbar">
+  <a href="#home">Home</a>
+  <!-- Add more links as needed -->
+</div>
 <div class="center">
 <h1>Penguin Learning</h1>
 <p>Learn With Penguins!</p>
