@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Virtual Pet</title>
+<title>MathQuest</title>
 <style>
 body {
   background-color: #F0EAD6;
@@ -13,63 +13,92 @@ body {
   margin-top: 50px;
 }
 
-.pet {
-  width: 200px;
-  height: 200px;
-  background-image: url('pet.png'); /* Replace with your own pet image */
-  background-size: cover;
-  margin: 0 auto;
+.question {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-.status {
-  font-size: 18px;
-  margin-top: 10px;
+.options {
+  display: flex;
+  justify-content: center;
 }
 
-.button {
+.option {
+  margin: 0 10px;
+  padding: 10px 20px;
   background-color: #4CAF50;
   color: white;
-  padding: 12px 20px;
   border: none;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-.button:hover {
+.option:hover {
   background-color: #45a049;
 }
 </style>
 </head>
 <body>
 <div class="container">
-  <div class="pet" id="pet"></div>
-  <div class="status" id="status">Status: Happy</div>
-  <button class="button" onclick="feed()">Feed</button>
-  <button class="button" onclick="play()">Play</button>
-  <button class="button" onclick="sleep()">Sleep</button>
+  <h1>MathQuest</h1>
+  <div class="question" id="question">What is 2 + 3?</div>
+  <div class="options">
+    <button class="option" onclick="checkAnswer(5)">5</button>
+    <button class="option" onclick="checkAnswer(4)">4</button>
+    <button class="option" onclick="checkAnswer(6)">6</button>
+  </div>
+  <p id="feedback"></p>
 </div>
 
 <script>
-let petStatus = "happy";
+let currentQuestion;
+let score = 0;
 
-function updateStatus() {
-  const statusElement = document.getElementById('status');
-  statusElement.textContent = `Status: ${petStatus}`;
+function generateQuestion() {
+  const num1 = Math.floor(Math.random() * 10) + 1;
+  const num2 = Math.floor(Math.random() * 10) + 1;
+  const operator = ['+', '-', '*'][Math.floor(Math.random() * 3)];
+  
+  switch (operator) {
+    case '+':
+      currentQuestion = `${num1} + ${num2}`;
+      return num1 + num2;
+    case '-':
+      currentQuestion = `${num1} - ${num2}`;
+      return num1 - num2;
+    case '*':
+      currentQuestion = `${num1} * ${num2}`;
+      return num1 * num2;
+    default:
+      return 0;
+  }
 }
 
-function feed() {
-  petStatus = "fed";
-  updateStatus();
+function checkAnswer(answer) {
+  const feedbackElement = document.getElementById('feedback');
+  
+  if (Number(answer) === eval(currentQuestion)) {
+    feedbackElement.textContent = 'Correct!';
+    score += 10;
+  } else {
+    feedbackElement.textContent = 'Incorrect. Try again!';
+    score -= 5;
+  }
+  
+  updateScore();
+  generateNextQuestion();
 }
 
-function play() {
-  petStatus = "playful";
-  updateStatus();
+function generateNextQuestion() {
+  const questionElement = document.getElementById('question');
+  questionElement.textContent = `What is ${generateQuestion()}?`;
 }
 
-function sleep() {
-  petStatus = "sleepy";
-  updateStatus();
+function updateScore() {
+  const feedbackElement = document.getElementById('feedback');
+  const scoreElement = document.createElement('p');
+  scoreElement.textContent = `Score: ${score}`;
+  
+  feedbackElement.appendChild(scoreElement);
 }
 </script>
 </body>
