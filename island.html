@@ -1,94 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Boss Battle</title>
+<title>Experience Bar</title>
 <style>
-body {
-  background-color: #F0EAD6;
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.boss {
+.exp-bar {
   width: 200px;
-  height: 200px;
-  background-image: url('boss.png'); /* Replace with your own boss image */
-  background-size: cover;
-  margin: 0 auto;
+  height: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #333;
+  overflow: hidden;
 }
 
-.question {
-  font-size: 18px;
-  margin-top: 10px;
-}
-
-.answer {
-  margin-top: 20px;
-}
-
-.button {
+.exp-fill {
+  width: 0;
+  height: 100%;
   background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
+  transition: width 0.5s ease-in-out;
 }
 
-.button:hover {
-  background-color: #45a049;
+.exp-text {
+  text-align: center;
+  margin-top: 5px;
 }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="boss" id="boss"></div>
-  <div class="question" id="question">What is 2 + 3?</div>
-  <div class="answer">
-    <input type="number" id="answerInput" min="1" max="10">
-    <button class="button" onclick="checkAnswer()">Submit</button>
-  </div>
+<div class="exp-bar" id="exp-bar">
+  <div class="exp-fill" id="exp-fill"></div>
 </div>
+<div class="exp-text" id="exp-text">0 / 100</div>
 
 <script>
-let bossHealth = 100;
+let currentExp = 0;
+const maxExp = 100;
+const expBarElement = document.getElementById('exp-bar');
+const expFillElement = document.getElementById('exp-fill');
+const expTextElement = document.getElementById('exp-text');
 
-function checkAnswer() {
-  const answerInput = document.getElementById('answerInput');
-  const answer = Number(answerInput.value);
-  
-  if (answer === 5) {
-    bossHealth -= 20;
-    if (bossHealth <= 0) {
-      alert('You defeated the boss!');
-      resetGame();
-    } else {
-      showNextQuestion();
-    }
-  } else {
-    alert('Incorrect answer. Try again!');
+function updateExpBar(exp) {
+  currentExp += exp;
+  if (currentExp > maxExp) {
+    currentExp = maxExp;
   }
-  
-  answerInput.value = '';
+  const expPercent = (currentExp / maxExp) * 100;
+  expFillElement.style.width = `${expPercent}%`;
+  expTextElement.textContent = `${currentExp} / ${maxExp}`;
 }
 
-function showNextQuestion() {
-  const questionElement = document.getElementById('question');
-  questionElement.textContent = 'What is ' + getRandomNumber() + ' + ' + getRandomNumber() + '?';
-}
-
-function getRandomNumber() {
-  return Math.floor(Math.random() * 10) + 1;
-}
-
-function resetGame() {
-  bossHealth = 100;
-  showNextQuestion();
-}
+// Example usage: increase experience by 10
+updateExpBar(10);
 </script>
 </body>
 </html>
