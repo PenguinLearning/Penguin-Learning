@@ -1,1 +1,88 @@
-<center><p style="font-family:verdana">Coming Soon!</p></center>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Game</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height - 50,
+      width: 50,
+      height: 50,
+      speed: 5
+    };
+    
+    const enemy = {
+      x: canvas.width / 2,
+      y: 50,
+      width: 50,
+      height: 50,
+      speed: 2
+    };
+    
+    let score = 0;
+    
+    function drawPlayer() {
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+    
+    function drawEnemy() {
+      ctx.fillStyle = 'red';
+      ctx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+    }
+    
+    function drawScore() {
+      ctx.fillStyle = 'black';
+      ctx.font = '24px Arial';
+      ctx.fillText(`Score: ${score}`, 10, 30);
+    }
+    
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      drawPlayer();
+      drawEnemy();
+      drawScore();
+      
+      enemy.y += enemy.speed;
+      
+      // Check for collision
+      if (enemy.y + enemy.height >= player.y && enemy.y <= player.y + player.height &&
+          enemy.x + enemy.width >= player.x && enemy.x <= player.x + player.width) {
+        // Collision detected, generate new math question
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        const answer = num1 + num2;
+        const userAnswer = prompt(`What is ${num1} + ${num2}?`);
+        if (parseInt(userAnswer) === answer) {
+          // Correct answer, increase score
+          score++;
+        } else {
+          // Incorrect answer, decrease score
+          score--;
+        }
+        // Reset enemy position
+        enemy.x = Math.random() * (canvas.width - enemy.width);
+        enemy.y = 50;
+      }
+      
+      requestAnimationFrame(update);
+    }
+    
+    update();
+  </script>
+</body>
+</html>
+
