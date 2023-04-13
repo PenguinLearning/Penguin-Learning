@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Virtual Pet</title>
+<style>
+body {
+  background-color: #F0EAD6;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.pet {
+  width: 200px;
+  height: 200px;
+  background-image: url('pet.png'); /* Replace with your own pet image */
+  background-size: cover;
+  margin: 0 auto;
+}
+
+.status {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.button:hover {
+  background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="pet" id="pet"></div>
+  <div class="status" id="status">Status: Happy</div>
+  <button class="button" onclick="feed()">Feed</button>
+  <button class="button" onclick="play()">Play</button>
+  <button class="button" onclick="sleep()">Sleep</button>
+</div>
+
+<script>
+let petStatus = "happy";
+
+function updateStatus() {
+  const statusElement = document.getElementById('status');
+  statusElement.textContent = `Status: ${petStatus}`;
+}
+
+function feed() {
+  petStatus = "fed";
+  updateStatus();
+}
+
+function play() {
+  petStatus = "playful";
+  updateStatus();
+}
+
+function sleep() {
+  petStatus = "sleepy";
+  updateStatus();
+}
+</script>
+</body>
+</html>
