@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shop</title>
+<style>
+body {
+  background-color: #F0EAD6;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.item {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #45a049;
+}
+
+.cart {
+  margin-top: 20px;
+}
+
+.cart-item {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  color: #333;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome to the Shop</h1>
+  <div class="items" id="items">
+    <div class="item" onclick="addToCart('Item 1', 10)">Item 1 - $10</div>
+    <div class="item" onclick="addToCart('Item 2', 20)">Item 2 - $20</div>
+    <div class="item" onclick="addToCart('Item 3', 15)">Item 3 - $15</div>
+  </div>
+  <div class="cart" id="cart">
+    <h2>Cart</h2>
+    <div class="cart-item" id="cart-item"></div>
+    <p>Total: $<span id="total">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+</div>
+
+<script>
+let cartItems = [];
+let total = 0;
+
+function addToCart(itemName, itemPrice) {
+  const cartItemElement = document.getElementById('cart-item');
+  const totalElement = document.getElementById('total');
+
+  cartItems.push({ name: itemName, price: itemPrice });
+  total += itemPrice;
+
+  cartItemElement.innerHTML = cartItems.map(item => `${item.name} - $${item.price}`).join('<br>');
+  totalElement.textContent = total;
+}
+
+function checkout() {
+  // Perform checkout logic, e.g. payment processing, order confirmation, etc.
+  // You can customize this function according to your specific requirements.
+  alert(`Total: $${total}\nThank you for your purchase!`);
+}
+</script>
+</body>
+</html>
 
