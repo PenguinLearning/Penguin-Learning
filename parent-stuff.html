@@ -1,1 +1,129 @@
-<center><p style="font-family:verdana">Coming Soon!</p></center>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Parent Panel</title>
+<style>
+body {
+  background-color: #f9f9f9;
+  font-family: verdana;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #FFA500;
+  overflow: hidden;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.center {
+  text-align: center;
+  margin-top: 60px; /* Add margin to center content below navbar */
+}
+
+h1 {
+  font-family: verdana;
+}
+
+h2 {
+  font-family: verdana;
+}
+
+p {
+  font-family: verdana;
+}
+
+.panel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.panel {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 400px;
+}
+
+.panel h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.panel label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.panel input[type="text"],
+.panel input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.panel button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+.panel button:hover {
+  background-color: #45a049;
+}
+
+</style>
+</head>
+<body>
+<div class="navbar">
+  <a href="#home">Home</a>
+  <!-- Add more links as needed -->
+</div>
+<div class="panel-container">
+  <div class="panel">
+    <h1>Parent Panel</h1>
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Enter your password">
+    <button onclick="login()">Login</button>
+  </div>
+</div>
+
+<script>
+function login() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  
+  // Perform login validation here, e.g. by sending data to a server-side script
+  
+  // Example login validation
+  if (username === "parent" && password === "password") {
+    alert("Login successful!");
+    // Redirect to parent dashboard or perform desired actions
+  } else {
+    alert("Invalid username or password. Please try again.");
+  }
+}
+</script>
+
+</body>
+</html>
